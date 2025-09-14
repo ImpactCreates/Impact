@@ -69,6 +69,10 @@
         .site-nav a:hover {
             background-color: var(--accent-purple);
         }
+        
+        .site-nav li + li {
+            margin-left: 10px;
+        }
 
         /* Hero Section */
         .hero-section {
@@ -213,6 +217,9 @@
             .hero-subtitle {
                 font-size: 1.2rem;
             }
+            .site-nav li {
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -224,7 +231,9 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#games">Games</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#proxy">Proxy</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a href="#settings">Settings/More</a></li>
             </ul>
         </nav>
     </header>
@@ -240,6 +249,22 @@
             <div id="game-list" class="game-grid">
                 <!-- Games will be loaded here by JavaScript -->
             </div>
+        </section>
+        
+        <!-- Placeholders for new sections -->
+        <section id="proxy" class="new-section">
+            <h2 class="section-title">Proxy Access</h2>
+            <p>Content for the proxy page goes here. You would need to implement proxy functionality separately.</p>
+        </section>
+        
+        <section id="chat" class="new-section">
+            <h2 class="section-title">Chat Room</h2>
+            <p>Content for the chat page goes here. You would need to implement a chat feature using a service or back-end.</p>
+        </section>
+        
+        <section id="settings" class="new-section">
+            <h2 class="section-title">Settings</h2>
+            <p>Content for the settings page goes here. This could include themes or other user preferences.</p>
         </section>
     </main>
 
