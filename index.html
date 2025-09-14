@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impact - Unblocked Games</title>
     <style>
+        /* All CSS is embedded here */
+
         /* Color Palette */
         :root {
             --primary-purple: #4b0082; /* Indigo */
@@ -74,7 +76,19 @@
             margin-left: 10px;
         }
 
-        /* Hero Section */
+        /* Content Sections */
+        .section {
+            display: none; /* Hide all sections by default */
+            padding: 40px 20px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            border: 1px solid var(--light-purple);
+        }
+
+        .section.active {
+            display: block; /* Show the active section */
+        }
+        
         .hero-section {
             text-align: center;
             padding: 80px 20px;
@@ -97,7 +111,6 @@
             font-style: italic;
         }
 
-        /* Games Section */
         .section-title {
             font-size: 2.5rem;
             text-align: center;
@@ -106,6 +119,7 @@
             text-transform: uppercase;
         }
 
+        /* Games Grid */
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -229,40 +243,39 @@
         <a href="#" class="logo">Impact</a>
         <nav class="site-nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#proxy">Proxy</a></li>
-                <li><a href="#chat">Chat</a></li>
-                <li><a href="#settings">Settings/More</a></li>
+                <li><a href="#" onclick="showSection('home'); return false;">Home</a></li>
+                <li><a href="#" onclick="showSection('games'); return false;">Games</a></li>
+                <li><a href="#" onclick="showSection('proxy'); return false;">Proxy</a></li>
+                <li><a href="#" onclick="showSection('chat'); return false;">Chat</a></li>
+                <li><a href="#" onclick="showSection('settings'); return false;">Settings/More</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="hero-section">
+        <section id="home" class="hero-section section active">
             <h2 class="hero-title">Your Gateway to Unblocked Games</h2>
             <p class="hero-subtitle">Play your favorite games, anywhere, anytime.</p>
         </section>
 
-        <section id="games" class="games-section">
+        <section id="games" class="games-section section">
             <h2 class="section-title">Featured Games</h2>
             <div id="game-list" class="game-grid">
                 <!-- Games will be loaded here by JavaScript -->
             </div>
         </section>
         
-        <!-- Placeholders for new sections -->
-        <section id="proxy" class="new-section">
+        <section id="proxy" class="content-section section">
             <h2 class="section-title">Proxy Access</h2>
             <p>Content for the proxy page goes here. You would need to implement proxy functionality separately.</p>
         </section>
         
-        <section id="chat" class="new-section">
+        <section id="chat" class="content-section section">
             <h2 class="section-title">Chat Room</h2>
             <p>Content for the chat page goes here. You would need to implement a chat feature using a service or back-end.</p>
         </section>
         
-        <section id="settings" class="new-section">
+        <section id="settings" class="content-section section">
             <h2 class="section-title">Settings</h2>
             <p>Content for the settings page goes here. This could include themes or other user preferences.</p>
         </section>
@@ -281,6 +294,8 @@
     </div>
 
     <script>
+        /* All JavaScript for game loading and navigation is embedded here. */
+
         const gamesData = [
             {
                 id: 'subway-surfers',
@@ -300,24 +315,29 @@
                 thumbnail: 'https://via.placeholder.com/300x150/4b0082/ffffff?text=Puzzle+Quest',
                 url: 'https://cdn-assets.example.com/games/puzzlequest/' // Placeholder URL
             }
-            // Add more game objects here
         ];
 
         const gameList = document.getElementById('game-list');
         const gameModal = document.getElementById('game-modal');
         const gameIframe = document.getElementById('game-iframe');
         const closeModalButton = document.querySelector('.close-button');
+        const sections = document.querySelectorAll('.section');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
 
         function createGameCard(game) {
             const card = document.createElement('div');
             card.classList.add('game-card');
-
             card.innerHTML = `
                 <img src="${game.thumbnail}" alt="${game.title} Thumbnail">
                 <h3>${game.title}</h3>
                 <button onclick="openGame('${game.url}')">Play Now</button>
             `;
-
             return card;
         }
 
@@ -333,24 +353,24 @@
         function openGame(url) {
             gameIframe.src = url;
             gameModal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevents scrolling when modal is open
+            document.body.style.overflow = 'hidden';
         }
 
         function closeGameModal() {
-            gameIframe.src = ''; // Stop the game from running
+            gameIframe.src = '';
             gameModal.style.display = 'none';
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
-        closeModalButton.onclick = closeGameModal;
+        if (closeModalButton) {
+            closeModalButton.onclick = closeGameModal;
+            window.onclick = (event) => {
+                if (event.target === gameModal) {
+                    closeGameModal();
+                }
+            };
+        }
 
-        window.onclick = (event) => {
-            if (event.target === gameModal) {
-                closeGameModal();
-            }
-        };
-
-        // Load games when the page is ready
         document.addEventListener('DOMContentLoaded', renderGames);
     </script>
 </body>
