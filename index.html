@@ -1,97 +1,332 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact Games</title>
-    <link rel="stylesheet" href="/ImpactCreates/style.css">
+    <title>Impact - Unblocked Games</title>
+    <style>
+        /* Color Palette */
+        :root {
+            --primary-purple: #4b0082; /* Indigo */
+            --light-purple: #800080;   /* Classic Purple */
+            --accent-purple: #8f00ff;  /* Electric Purple */
+            --background-dark: #1a0033;
+            --text-light: #f4e8ff;
+            --card-background: #2b0054;
+        }
 
+        /* Base Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: var(--primary-purple);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-purple);
+        }
+
+        .logo {
+            font-size: 2rem;
+            margin: 0;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .site-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .site-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .site-nav a:hover {
+            background-color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(75, 0, 130, 0.7), rgba(143, 0, 255, 0.3)), url('https://via.placeholder.com/1600x600/4b0082/ffffff?text=Impact+Games') center center no-repeat;
+            background-size: cover;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        /* Games Section */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--light-purple);
+            text-transform: uppercase;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background-color: var(--card-background);
+            border: 2px solid var(--light-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(143, 0, 255, 0.7);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .game-card h3 {
+            font-size: 1.2rem;
+            margin: 15px 0 10px;
+        }
+
+        .game-card button {
+            background-color: var(--accent-purple);
+            color: var(--text-light);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .game-card button:hover {
+            background-color: #7200cc;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-purple);
+            margin-top: 40px;
+            border-top: 2px solid var(--accent-purple);
+        }
+
+        /* Modal for Game Play */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--background-dark);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--accent-purple);
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(143, 0, 255, 0.5);
+            max-height: 90vh;
+        }
+
+        .close-button {
+            color: var(--text-light);
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .game-iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="brand">Impact</div>
-            <ul class="nav-links">
-                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-                <li><a href="#" class="nav-link" data-page="games">Games</a></li>
-                <li><a href="#" class="nav-link" data-page="proxy">Proxy</a></li>
-                <li><a href="#" class="nav-link" data-page="settings">Settings</a></li>
+
+    <header class="site-header">
+        <a href="#" class="logo">Impact</a>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#about">About</a></li>
             </ul>
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="checkbox">
-                    <input type="checkbox" id="checkbox" />
-                    <div class="slider round"></div>
-                </label>
-            </div>
         </nav>
     </header>
 
-    <main id="main-content">
-        <!-- Content will be loaded here dynamically -->
-        <section id="home-page" class="page-content active">
-            <div class="welcome-section">
-                <h2>Welcome to Impact Games!</h2>
-                <p>Your one-stop shop for unblocked gaming entertainment.</p>
-            </div>
-            <section class="game-list">
-                <h3>Featured Games</h3>
-                <!-- Game items will go here -->
-                <div class="game-card">
-                    <img src="https://via.placeholder.com/200x150.png?text=Game+1" alt="Game 1">
-                    <h4>Game 1</h4>
-                    <a href="#">Play Now</a>
-                </div>
-                <div class="game-card">
-                    <img src="https://via.placeholder.com/200x150.png?text=Game+2" alt="Game 2">
-                    <h4>Game 2</h4>
-                    <a href="#">Play Now</a>
-                </div>
-            </section>
+    <main class="container">
+        <section class="hero-section">
+            <h2 class="hero-title">Your Gateway to Unblocked Games</h2>
+            <p class="hero-subtitle">Play your favorite games, anywhere, anytime.</p>
         </section>
 
-        <section id="games-page" class="page-content hidden">
-            <div class="games-library">
-                <h2>All Games</h2>
-                <p>Browse our extensive collection of unblocked games.</p>
-                <!-- More game cards will be listed here -->
+        <section id="games" class="games-section">
+            <h2 class="section-title">Featured Games</h2>
+            <div id="game-list" class="game-grid">
+                <!-- Games will be loaded here by JavaScript -->
             </div>
         </section>
-
-        <section id="proxy-page" class="page-content hidden">
-            <div class="proxy-info">
-                <h2>Web Proxy</h2>
-                <p>Bypass network restrictions to access blocked websites.</p>
-                <form id="proxy-form">
-                    <input type="text" id="proxy-url" placeholder="Enter a URL...">
-                    <button type="submit">Go</button>
-                </form>
-                <div id="proxy-viewer">
-                    <!-- The proxied content will be displayed here -->
-                </div>
-            </div>
-        </section>
-
-        <section id="settings-page" class="page-content hidden">
-            <div class="settings-content">
-                <h2>Settings</h2>
-                <p>Customize your experience here.</p>
-                <div class="setting-item">
-                    <span>Dark Mode:</span>
-                    <!-- The theme switch from the header is sufficient, no need for a duplicate -->
-                </div>
-                <div class="setting-item">
-                    <h3>About Impact</h3>
-                    <p>Impact Games was created for entertainment and easy access to unblocked content.</p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <footer>
-        <p>&copy; 2025 Impact Games</p>
+    <footer class="site-footer">
+        <p>&copy; 2025 Impact. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Game Modal -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <iframe id="game-iframe" class="game-iframe" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        const gamesData = [
+            {
+                id: 'subway-surfers',
+                title: 'Subway Surfers',
+                thumbnail: 'https://via.placeholder.com/300x150/800080/ffffff?text=Subway+Surfers',
+                url: 'https://cdn-assets.example.com/games/subwaysurfers/' // Placeholder URL
+            },
+            {
+                id: 'retro-racer',
+                title: 'Retro Racer',
+                thumbnail: 'https://via.placeholder.com/300x150/8f00ff/ffffff?text=Retro+Racer',
+                url: 'https://cdn-assets.example.com/games/retroracer/' // Placeholder URL
+            },
+            {
+                id: 'puzzle-quest',
+                title: 'Puzzle Quest',
+                thumbnail: 'https://via.placeholder.com/300x150/4b0082/ffffff?text=Puzzle+Quest',
+                url: 'https://cdn-assets.example.com/games/puzzlequest/' // Placeholder URL
+            }
+            // Add more game objects here
+        ];
+
+        const gameList = document.getElementById('game-list');
+        const gameModal = document.getElementById('game-modal');
+        const gameIframe = document.getElementById('game-iframe');
+        const closeModalButton = document.querySelector('.close-button');
+
+        function createGameCard(game) {
+            const card = document.createElement('div');
+            card.classList.add('game-card');
+
+            card.innerHTML = `
+                <img src="${game.thumbnail}" alt="${game.title} Thumbnail">
+                <h3>${game.title}</h3>
+                <button onclick="openGame('${game.url}')">Play Now</button>
+            `;
+
+            return card;
+        }
+
+        function renderGames() {
+            if (gameList) {
+                gamesData.forEach(game => {
+                    const gameCard = createGameCard(game);
+                    gameList.appendChild(gameCard);
+                });
+            }
+        }
+
+        function openGame(url) {
+            gameIframe.src = url;
+            gameModal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevents scrolling when modal is open
+        }
+
+        function closeGameModal() {
+            gameIframe.src = ''; // Stop the game from running
+            gameModal.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        closeModalButton.onclick = closeGameModal;
+
+        window.onclick = (event) => {
+            if (event.target === gameModal) {
+                closeGameModal();
+            }
+        };
+
+        // Load games when the page is ready
+        document.addEventListener('DOMContentLoaded', renderGames);
+    </script>
 </body>
 </html>
