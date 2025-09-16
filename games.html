@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purple Games - Games</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game-card-container {
+            position: relative;
+            width: 250px; /* Adjust card size as needed */
+            height: 250px; /* Adjust card size as needed */
+            margin: 20px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .game-image {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .game-card-container:hover .game-image {
+            transform: scale(1.1); /* Enlarge the image */
+            filter: blur(5px); /* Blur the image */
+        }
+
+        .game-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #f0e6ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .game-card-container:hover .game-info {
+            opacity: 1; /* Show the text and blur */
+        }
+
+        .game-info h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .game-info p {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Game Library</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="settings.html">Settings</a>
+        <a href="proxy.html">Proxy</a>
+        <a href="chat.html">Chat</a>
+    </nav>
+    <main>
+        <h2>Available Games</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+            
+            <!-- Game Card 1 -->
+            <a href="#">
+                <div class="game-card-container">
+                    <img src="your-game-image-1.jpg" alt="Game Title 1" class="game-image">
+                    <div class="game-info">
+                        <h3>Game Title 1</h3>
+                        <p>Description of the first game.</p>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Game Card 2 -->
+            <a href="#">
+                <div class="game-card-container">
+                    <img src="your-game-image-2.jpg" alt="Game Title 2" class="game-image">
+                    <div class="game-info">
+                        <h3>Game Title 2</h3>
+                        <p>Description of the second game.</p>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Game Card 3 -->
+            <a href="#">
+                <div class="game-card-container">
+                    <img src="your-game-image-3.jpg" alt="Game Title 3" class="game-image">
+                    <div class="game-info">
+                        <h3>Game Title 3</h3>
+                        <p>Description of the third game.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Add more game cards here -->
+            
+        </div>
+        
+    </main>
+</body>
+</html>
 
