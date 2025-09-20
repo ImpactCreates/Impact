@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games</title>
+    <title>Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,95 +12,90 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
             margin: 0;
             padding: 0;
         }
-
-        .card-container {
-            position: relative;
-            overflow: hidden;
+        .toggle-switch .toggle-track {
+            background-color: #ccc;
+            transition: background-color 0.3s;
         }
-
-        .card-image {
-            transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+        .toggle-switch input:checked + .toggle-track {
+            background-color: #3b82f6;
         }
-
-        .card-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
+        .toggle-switch .toggle-track .toggle-thumb {
+            transform: translateX(0);
+            transition: transform 0.3s;
         }
-
-        .card-container:hover .card-image {
-            filter: blur(4px) brightness(60%);
-            transform: scale(1.05);
-        }
-
-        .card-container:hover .card-overlay {
-            opacity: 1;
+        .toggle-switch input:checked + .toggle-track .toggle-thumb {
+            transform: translateX(1.5rem);
         }
     </style>
 </head>
-<body class="flex min-h-screen">
-    <!-- Left Navigation Bar -->
-    <nav class="w-16 md:w-20 bg-white h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
-        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-home text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Home</span>
+<body class="flex min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+    <nav class="w-16 md:w-20 bg-white dark:bg-gray-800 h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
+        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+            <i class="fas fa-home text-2xl md:text-3xl text-gray-400 dark:text-gray-500 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Home</span>
         </a>
-        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-gamepad text-2xl md:text-3xl text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Games</span>
+        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+            <i class="fas fa-gamepad text-2xl md:text-3xl text-gray-400 dark:text-gray-500 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Games</span>
         </a>
-        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-cog text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Settings</span>
+        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg bg-gray-100 dark:bg-gray-700 transition-colors duration-200">
+            <i class="fas fa-cog text-2xl md:text-3xl text-blue-500"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Settings</span>
         </a>
     </nav>
-
-    <!-- Main Content Area -->
     <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28">
-        <div class="max-w-6xl mx-auto mt-12">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Available Games</h1>
-            <p class="text-lg md:text-xl text-gray-600 mb-12 text-center">Hover over the cards below to learn more about each game.</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Game Card 1 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/38bdf8/ffffff?text=Strategy+Game" alt="Strategy Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Strategy Quest</h2>
-                            <p class="text-sm mt-2">A deep strategy game where you build an empire and conquer your rivals.</p>
-                        </div>
+        <div class="max-w-4xl mx-auto mt-12 bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl transition-colors duration-500">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">Settings</h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 text-center">Customize your website experience here.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md transition-colors duration-500">
+                    <h2 class="text-2xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Appearance</h2>
+                    <p class="text-gray-700 dark:text-gray-300">Change the theme, font size, or other visual preferences.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="font-medium text-gray-800 dark:text-gray-200">Dark Mode</span>
+                        <label for="darkModeToggle" class="flex items-center cursor-pointer toggle-switch">
+                            <div class="relative">
+                                <input type="checkbox" id="darkModeToggle" class="sr-only">
+                                <div class="block bg-gray-300 w-14 h-8 rounded-full toggle-track"></div>
+                                <div class="dot absolute left-1 top-1 bg-white dark:bg-gray-600 w-6 h-6 rounded-full transition-transform transform toggle-thumb shadow-md"></div>
+                            </div>
+                        </label>
                     </div>
                 </div>
-
-                <!-- Game Card 2 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/4ade80/ffffff?text=Puzzle+Game" alt="Puzzle Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Mind Bender</h2>
-                            <p class="text-sm mt-2">Test your logic with a series of challenging and beautiful puzzles.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game Card 3 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Adventure+Game" alt="Adventure Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Forgotten Realms</h2>
-                            <p class="text-sm mt-2">Embark on an epic journey to a land of magic and mystery.</p>
-                        </div>
-                    </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md transition-colors duration-500">
+                    <h2 class="text-2xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Account Settings</h2>
+                    <p class="text-gray-700 dark:text-gray-300">Manage your profile, password, and other personal information.</p>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        const html = document.documentElement;
+        const toggle = document.getElementById('darkModeToggle');
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+        }
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        setTheme(currentTheme);
+        if (currentTheme === 'dark') {
+            toggle.checked = true;
+        }
+        toggle.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                setTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                setTheme('light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
