@@ -3,341 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purple Games - Games</title>
-    <style>
-        /* General Styles */
-        :root {
-            --purple-dark: #2A0944;
-            --purple-medium: #3F0071;
-            --purple-light: #5E268E;
-            --purple-accent: #9D72E1;
-            --purple-text: #EAEAEA;
-            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            font-family: var(--font-stack);
-            background-color: var(--purple-dark);
-            color: var(--purple-text);
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.5s ease;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        header {
-            background-color: var(--purple-medium);
-            padding: 15px 20px;
-            border-bottom: 2px solid var(--purple-accent);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--purple-accent);
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px var(--purple-dark);
-        }
-
-        nav a {
-            color: var(--purple-text);
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 1.1em;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: var(--purple-light);
-        }
-
-        /* Main Content */
-        main {
-            padding: 40px 0;
-        }
-
-        .page-section {
-            padding: 20px;
-            background-color: var(--purple-medium);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
-        }
-
-        /* Game Pages */
-        .game-page h2 {
-            font-size: 2.5em;
-            color: var(--purple-accent);
-            text-align: center;
-        }
-
-        canvas {
-            display: block;
-            margin: 20px auto;
-            border: 2px solid var(--purple-accent);
-            background-color: var(--purple-dark);
-            cursor: none;
-        }
-
-        .controls {
-            text-align: center;
-            font-size: 1.2em;
-            color: var(--purple-text);
-        }
-    </style>
+    <title>Games | My Cool Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="logo">Purple Games</a>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="games.html">Games</a>
-    </nav>
-</header>
+    <div class="sidebar">
+        <a href="home.html"><i class="fas fa-home"></i> <span>Home</span></a>
+        <a href="games.html" class="active"><i class="fas fa-gamepad"></i> <span>Games</span></a>
+        <a href="web.html"><i class="fas fa-globe"></i> <span>Web</span></a>
+        <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a>
+    </div>
 
-<main class="container">
-    <!-- Snake Game Section -->
-    <section id="snake-game" class="page-section">
-        <div class="game-page">
-            <h2>Snake</h2>
-            <canvas id="snakeCanvas" width="400" height="400"></canvas>
-            <p class="controls">Use the arrow keys to control the snake. Click to start.</p>
+    <div class="main-content">
+        <h1>Games</h1>
+        <p>Explore our selection of awesome games! Hover over an image to reveal its title.</p>
+        
+        <div class="games-container">
+            <!-- Game 1 -->
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/9d00ff/FFF" alt="Game 1">
+                <span class="game-title">Adventure Quest</span>
+            </div>
+            
+            <!-- Game 2 -->
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/800080/FFF" alt="Game 2">
+                <span class="game-title">Pixel Fighter</span>
+            </div>
+            
+            <!-- Game 3 -->
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/4b0082/FFF" alt="Game 3">
+                <span class="game-title">Cosmic Racer</span>
+            </div>
+
+            <!-- Game 4 -->
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/6f2da8/FFF" alt="Game 4">
+                <span class="game-title">Mystery Manor</span>
+            </div>
+
+            <!-- Add more game items here -->
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/32194f/FFF" alt="Game 5">
+                <span class="game-title">Tower Defense</span>
+            </div>
+
+            <div class="game-item">
+                <img src="https://placehold.co/400x400/5b1a8d/FFF" alt="Game 6">
+                <span class="game-title">Space Shooter</span>
+            </div>
         </div>
-    </section>
-
-    <!-- Pong Game Section -->
-    <section id="pong-game" class="page-section">
-        <div class="game-page">
-            <h2>Pong</h2>
-            <canvas id="pongCanvas" width="600" height="400"></canvas>
-            <p class="controls">Player 1: W/S. Player 2: Up/Down arrow keys. Click to start.</p>
-        </div>
-    </section>
-</main>
-
-<script>
-    // == Snake Game JS ==
-    const snakeCanvas = document.getElementById('snakeCanvas');
-    const snakeCtx = snakeCanvas.getContext('2d');
-    const snakeSize = 20;
-    let snakeInterval;
-    let snakeGameRunning = false;
-
-    let snake = [{ x: 200, y: 200 }];
-    let food = {};
-    let dx = snakeSize;
-    let dy = 0;
-
-    function generateFood() {
-        food = {
-            x: Math.floor(Math.random() * (snakeCanvas.width / snakeSize)) * snakeSize,
-            y: Math.floor(Math.random() * (snakeCanvas.height / snakeSize)) * snakeSize
-        };
-    }
-
-    function drawSnakePart(snakePart) {
-        snakeCtx.fillStyle = '#9D72E1'; /* var(--purple-accent) */
-        snakeCtx.strokeStyle = '#5E268E'; /* var(--purple-light) */
-        snakeCtx.fillRect(snakePart.x, snakePart.y, snakeSize, snakeSize);
-        snakeCtx.strokeRect(snakePart.x, snakePart.y, snakeSize, snakeSize);
-    }
-
-    function drawFood() {
-        snakeCtx.fillStyle = 'red';
-        snakeCtx.strokeStyle = 'darkred';
-        snakeCtx.fillRect(food.x, food.y, snakeSize, snakeSize);
-        snakeCtx.strokeRect(food.x, food.y, snakeSize, snakeSize);
-    }
-
-    function moveSnake() {
-        const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-        snake.unshift(head);
-
-        if (head.x === food.x && head.y === food.y) {
-            generateFood();
-        } else {
-            snake.pop();
-        }
-    }
-
-    function checkCollision() {
-        for (let i = 4; i < snake.length; i++) {
-            if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
-        }
-        const hitWall = snake[0].x < 0 || snake[0].x >= snakeCanvas.width || snake[0].y < 0 || snake[0].y >= snakeCanvas.height;
-        return hitWall;
-    }
-
-    function updateSnake() {
-        if (checkCollision()) {
-            stopSnakeGame();
-            alert('Game Over! Your score: ' + (snake.length - 1));
-            return;
-        }
-
-        snakeCtx.fillStyle = '#2A0944'; /* var(--purple-dark) */
-        snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
-        drawFood();
-        moveSnake();
-        snake.forEach(drawSnakePart);
-    }
+    </div>
     
-    document.addEventListener('keydown', e => {
-        if (!snakeGameRunning) return;
-        const keyPressed = e.key;
-        const goingUp = dy === -snakeSize;
-        const goingDown = dy === snakeSize;
-        const goingRight = dx === snakeSize;
-        const goingLeft = dx === -snakeSize;
-
-        if (keyPressed === 'ArrowLeft' && !goingRight) { dx = -snakeSize; dy = 0; }
-        if (keyPressed === 'ArrowUp' && !goingDown) { dx = 0; dy = -snakeSize; }
-        if (keyPressed === 'ArrowRight' && !goingLeft) { dx = snakeSize; dy = 0; }
-        if (keyPressed === 'ArrowDown' && !goingUp) { dx = 0; dy = snakeSize; }
-    });
-
-    function startSnakeGame() {
-        if (snakeGameRunning) return;
-        snakeGameRunning = true;
-        snake = [{ x: 200, y: 200 }];
-        dx = snakeSize;
-        dy = 0;
-        generateFood();
-        snakeInterval = setInterval(updateSnake, 100);
-    }
-    function stopSnakeGame() {
-        snakeGameRunning = false;
-        clearInterval(snakeInterval);
-    }
-    snakeCanvas.addEventListener('click', startSnakeGame);
-
-    // == Pong Game JS ==
-    const pongCanvas = document.getElementById('pongCanvas');
-    const pongCtx = pongCanvas.getContext('2d');
-    let pongInterval;
-    let pongGameRunning = false;
-
-    let ball = { x: pongCanvas.width / 2, y: pongCanvas.height / 2, dx: 4, dy: 4, radius: 10 };
-    let paddle1 = { x: 10, y: pongCanvas.height / 2 - 50, width: 10, height: 100, dy: 0, score: 0 };
-    let paddle2 = { x: pongCanvas.width - 20, y: pongCanvas.height / 2 - 50, width: 10, height: 100, dy: 0, score: 0 };
-
-    function drawBall() {
-        pongCtx.beginPath();
-        pongCtx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        pongCtx.fillStyle = '#9D72E1'; /* var(--purple-accent) */
-        pongCtx.fill();
-        pongCtx.closePath();
-    }
-
-    function drawPaddles() {
-        pongCtx.fillStyle = '#EAEAEA'; /* var(--purple-text) */
-        pongCtx.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
-        pongCtx.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
-    }
-
-    function drawScore() {
-        pongCtx.font = "24px var(--font-stack)";
-        pongCtx.fillStyle = '#9D72E1'; /* var(--purple-accent) */
-        pongCtx.fillText(paddle1.score, pongCanvas.width / 4, 30);
-        pongCtx.fillText(paddle2.score, pongCanvas.width * 3 / 4, 30);
-    }
-
-    function updatePong() {
-        // Clear canvas
-        pongCtx.fillStyle = '#2A0944'; /* var(--purple-dark) */
-        pongCtx.fillRect(0, 0, pongCanvas.width, pongCanvas.height);
-
-        // Update ball position
-        ball.x += ball.dx;
-        ball.y += ball.dy;
-
-        // Ball collision with top/bottom walls
-        if (ball.y + ball.dy > pongCanvas.height - ball.radius || ball.y + ball.dy < ball.radius) {
-            ball.dy = -ball.dy;
-        }
-
-        // Ball collision with paddles
-        if (ball.x < paddle1.x + paddle1.width && ball.y > paddle1.y && ball.y < paddle1.y + paddle1.height) {
-            ball.dx = -ball.dx;
-        }
-        if (ball.x > paddle2.x && ball.y > paddle2.y && ball.y < paddle2.y + paddle2.height) {
-            ball.dx = -ball.dx;
-        }
-
-        // Ball goes past paddles (scoring)
-        if (ball.x < 0) {
-            paddle2.score++;
-            resetBall();
-        }
-        if (ball.x > pongCanvas.width) {
-            paddle1.score++;
-            resetBall();
-        }
-
-        // Update paddle positions
-        paddle1.y += paddle1.dy;
-        paddle2.y += paddle2.dy;
-
-        // Prevent paddles from going off-screen
-        if (paddle1.y < 0) paddle1.y = 0;
-        if (paddle1.y + paddle1.height > pongCanvas.height) paddle1.y = pongCanvas.height - paddle1.height;
-        if (paddle2.y < 0) paddle2.y = 0;
-        if (paddle2.y + paddle2.height > pongCanvas.height) paddle2.y = pongCanvas.height - paddle2.height;
-
-        // Draw everything
-        drawBall();
-        drawPaddles();
-        drawScore();
-    }
-
-    function resetBall() {
-        ball.x = pongCanvas.width / 2;
-        ball.y = pongCanvas.height / 2;
-        ball.dx = -ball.dx;
-        ball.dy = (Math.random() * 2 - 1) * 4;
-    }
-
-    document.addEventListener('keydown', e => {
-        if (!pongGameRunning) return;
-        if (e.key === 'w') paddle1.dy = -5;
-        if (e.key === 's') paddle1.dy = 5;
-        if (e.key === 'ArrowUp') paddle2.dy = -5;
-        if (e.key === 'ArrowDown') paddle2.dy = 5;
-    });
-
-    document.addEventListener('keyup', e => {
-        if (!pongGameRunning) return;
-        if (e.key === 'w' || e.key === 's') paddle1.dy = 0;
-        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') paddle2.dy = 0;
-    });
-
-    function startPongGame() {
-        if (pongGameRunning) return;
-        pongGameRunning = true;
-        paddle1.score = 0;
-        paddle2.score = 0;
-        resetBall();
-        pongInterval = setInterval(updatePong, 20);
-    }
-    function stopPongGame() {
-        pongGameRunning = false;
-        clearInterval(pongInterval);
-    }
-    pongCanvas.addEventListener('click', startPongGame);
-</script>
-
+    <script src="js/script.js"></script>
 </body>
 </html>
