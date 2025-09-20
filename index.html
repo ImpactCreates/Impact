@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Welcome</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0d1a0d;
+            background-color: #121c16;
+            color: #39ff14;
         }
         @keyframes spin {
             from {
@@ -27,19 +26,45 @@
         .atom-icon {
             animation: spin 8s linear infinite;
         }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .modal {
+            background-color: #1e3427;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #39ff14;
+            max-width: 24rem;
+            width: 90%;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
-<body class="flex min-h-screen bg-[#0d1a0d] text-[#39ff14]">
+<body class="flex min-h-screen bg-[#121c16] text-[#39ff14] overflow-hidden">
+    <!-- Left Navigation Bar -->
     <nav class="w-16 md:w-20 bg-[#162e16] h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
         <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg bg-[#204220] transition-colors duration-200">
             <i class="fas fa-home text-2xl md:text-3xl text-[#39ff14]"></i>
             <span class="text-xs mt-1 font-medium hidden md:block">Home</span>
         </a>
-        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
+        <a href="games.html" id="gamesLink" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
             <i class="fas fa-gamepad text-2xl md:text-3xl text-[#39ff14]"></i>
             <span class="text-xs mt-1 font-medium hidden md:block">Games</span>
         </a>
-        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
+        <a href="settings.html" id="settingsLink" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
             <i class="fas fa-cog text-2xl md:text-3xl text-[#39ff14]"></i>
             <span class="text-xs mt-1 font-medium hidden md:block">Settings</span>
         </a>
@@ -47,82 +72,79 @@
             <i class="fas fa-atom text-4xl text-[#39ff14] atom-icon"></i>
         </div>
     </nav>
-    <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28">
-        <div class="flex justify-end space-x-4 mb-8">
-            <button id="signInBtn" class="bg-[#39ff14] hover:bg-[#24a30e] text-[#0d1a0d] font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#39ff14] focus:ring-opacity-50">
-                Sign In
-            </button>
-            <button id="signUpBtn" class="bg-[#39ff14] hover:bg-[#24a30e] text-[#0d1a0d] font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#39ff14] focus:ring-opacity-50">
-                Sign Up
-            </button>
-            <button id="signOutBtn" class="bg-transparent border-2 border-[#39ff14] text-[#39ff14] font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#39ff14] focus:ring-opacity-50 hidden">
-                Log Out
-            </button>
-        </div>
-        <div id="welcome-message" class="text-center text-2xl font-bold mt-12 hidden"></div>
+    <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28 flex flex-col items-center justify-center text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white">
+            Welcome, <span id="welcomeName" class="text-[#39ff14]">Player</span>!
+        </h1>
+        <p class="mt-4 text-lg md:text-xl font-light text-gray-400">
+            Explore the site and have fun.
+        </p>
     </main>
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 class="text-2xl font-bold mb-4">Welcome!</h2>
+            <p class="text-sm text-gray-400 mb-6">Choose a username or continue as a guest.</p>
+            <div class="space-y-4">
+                <input type="text" id="usernameInput" placeholder="Enter your username" class="block w-full px-4 py-2 bg-[#162e16] rounded-lg border border-[#39ff14] focus:outline-none focus:ring focus:ring-[#39ff14] text-white">
+                <button id="saveUsernameBtn" class="w-full bg-[#39ff14] hover:bg-[#24a30e] text-[#1e3427] font-bold py-3 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#39ff14] focus:ring-opacity-50">
+                    Save Username
+                </button>
+                <button id="skipBtn" class="w-full bg-transparent border-2 border-[#39ff14] text-[#39ff14] font-bold py-3 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#39ff14] focus:ring-opacity-50">
+                    Skip
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        
-        const signInBtn = document.getElementById('signInBtn');
-        const signUpBtn = document.getElementById('signUpBtn');
-        const signOutBtn = document.getElementById('signOutBtn');
-        const welcomeMessage = document.getElementById('welcome-message');
 
+        const welcomeModal = document.getElementById('welcomeModal');
+        const usernameInput = document.getElementById('usernameInput');
+        const saveUsernameBtn = document.getElementById('saveUsernameBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const welcomeName = document.getElementById('welcomeName');
+
+        function setUsername(name) {
+            localStorage.setItem('keenisd-username', name);
+            welcomeName.textContent = name;
+            welcomeModal.classList.add('hidden');
+        }
+
+        // Check if username is already saved
+        const savedUsername = localStorage.getItem('keenisd-username');
+        if (savedUsername) {
+            welcomeName.textContent = savedUsername;
+            welcomeModal.classList.add('hidden');
+        } else {
+            welcomeModal.classList.remove('hidden');
+        }
+
+        saveUsernameBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim() || 'Player';
+            setUsername(username);
+        });
+
+        skipBtn.addEventListener('click', () => {
+            setUsername('Guest');
+        });
+        
+        // Firebase Auth Logic (simplified for this use case)
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in.
-                const userIdentifier = user.displayName || user.email;
-                welcomeMessage.textContent = `Welcome, ${userIdentifier}!`;
-                welcomeMessage.classList.remove('hidden');
-                signInBtn.classList.add('hidden');
-                signUpBtn.classList.add('hidden');
-                signOutBtn.classList.remove('hidden');
+                console.log("User is signed in.");
             } else {
-                // User is signed out.
-                welcomeMessage.classList.add('hidden');
-                signInBtn.classList.remove('hidden');
-                signUpBtn.classList.remove('hidden');
-                signOutBtn.classList.add('hidden');
+                console.log("User is signed out.");
             }
         });
 
-        const provider = new GoogleAuthProvider();
-
-        signUpBtn.addEventListener('click', () => {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const user = result.user;
-                    console.log("User signed in:", user);
-                }).catch((error) => {
-                    console.error("Google Sign Up Error:", error);
-                });
-        });
-
-        signInBtn.addEventListener('click', () => {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const user = result.user;
-                    console.log("User signed in:", user);
-                }).catch((error) => {
-                    console.error("Google Sign In Error:", error);
-                });
-        });
-
-        signOutBtn.addEventListener('click', () => {
-            signOut(auth)
-                .then(() => {
-                    console.log("User signed out successfully.");
-                }).catch((error) => {
-                    console.error("Sign out error:", error);
-                });
-        });
-        
         if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
             signInWithCustomToken(auth, __initial_auth_token)
                 .catch((error) => {
