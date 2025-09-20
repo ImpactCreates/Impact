@@ -3,126 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>impct - Settings</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* This internal CSS is for convenience and matches the previous page's styling */
         body {
-            background-color: #2e004a;
-            color: #f0e6ff;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
             margin: 0;
             padding: 0;
         }
 
-        header {
-            background-color: #5c009d;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #8e2de2;
+        .card-container {
+            position: relative;
+            overflow: hidden;
         }
 
-        nav {
-            background-color: #4b0082;
-            padding: 10px;
-            text-align: center;
+        .card-image {
+            transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
-        nav a {
-            color: #f0e6ff;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+        .card-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
         }
 
-        nav a:hover {
-            background-color: #7b2cbb;
+        .card-container:hover .card-image {
+            filter: blur(4px) brightness(60%);
+            transform: scale(1.05);
         }
 
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #4b0082;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        h1, h2 {
-            color: #e0b0ff;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"],
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #7b2cbb;
-            border-radius: 5px;
-            background-color: #6a1a9e;
-            color: #f0e6ff;
-            box-sizing: border-box;
-        }
-
-        .form-group input[type="text"]::placeholder {
-            color: rgba(240, 230, 255, 0.6);
-        }
-
-        .settings-button {
-            padding: 12px 25px;
-            background-color: #7b2cbb;
-            color: #f0e6ff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .settings-button:hover {
-            background-color: #8e2de2;
+        .card-container:hover .card-overlay {
+            opacity: 1;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>impct</h1>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="games.html">Games</a>
-        <a href="settings.html">Settings</a>
-        <a href="proxy.html">Proxy</a>
-        <a href="chat.html">Chat</a>
+<body class="flex min-h-screen">
+    <!-- Left Navigation Bar -->
+    <nav class="w-16 md:w-20 bg-white h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
+        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-home text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Home</span>
+        </a>
+        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-gamepad text-2xl md:text-3xl text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Games</span>
+        </a>
+        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-cog text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Settings</span>
+        </a>
     </nav>
-    <main>
-        <h2>User Settings</h2>
-        <form>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Your Username">
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28">
+        <div class="max-w-6xl mx-auto mt-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Available Games</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-12 text-center">Hover over the cards below to learn more about each game.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game Card 1 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/38bdf8/ffffff?text=Strategy+Game" alt="Strategy Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Strategy Quest</h2>
+                            <p class="text-sm mt-2">A deep strategy game where you build an empire and conquer your rivals.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/4ade80/ffffff?text=Puzzle+Game" alt="Puzzle Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Mind Bender</h2>
+                            <p class="text-sm mt-2">Test your logic with a series of challenging and beautiful puzzles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Adventure+Game" alt="Adventure Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Forgotten Realms</h2>
+                            <p class="text-sm mt-2">Embark on an epic journey to a land of magic and mystery.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="theme">Theme:</label>
-                <select id="theme" name="theme">
-                    <option value="purple">Purple (Default)</option>
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
-                </select>
-            </div>
-            <button type="submit" class="settings-button">Save Settings</button>
-        </form>
+        </div>
     </main>
 </body>
 </html>
