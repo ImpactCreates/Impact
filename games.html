@@ -12,95 +12,153 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
-            margin: 0;
-            padding: 0;
+            background-color: #121c16;
+            color: #39ff14;
         }
-
-        .card-container {
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .atom-icon {
+            animation: spin 8s linear infinite;
+        }
+        .game-card {
+            aspect-ratio: 1 / 1;
+            background-size: cover;
+            background-position: center;
             position: relative;
-            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
         }
-
-        .card-image {
-            transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        .card-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
-        }
-
-        .card-container:hover .card-image {
-            filter: blur(4px) brightness(60%);
+        .game-card:hover {
             transform: scale(1.05);
         }
-
-        .card-container:hover .card-overlay {
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(0px);
+            transition: backdrop-filter 0.3s ease;
+            border-radius: 0.5rem;
+        }
+        .game-card:hover::before {
+            backdrop-filter: blur(5px);
+        }
+        .game-card .game-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            z-index: 10;
+        }
+        .game-card:hover .game-info {
             opacity: 1;
         }
     </style>
 </head>
-<body class="flex min-h-screen">
+<body class="flex flex-col min-h-screen">
     <!-- Left Navigation Bar -->
-    <nav class="w-16 md:w-20 bg-white h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
-        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-home text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Home</span>
+    <nav class="w-16 md:w-20 bg-[#162e16] h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
+        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
+            <i class="fas fa-home text-2xl md:text-3xl text-[#39ff14]"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Home</span>
         </a>
-        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-gamepad text-2xl md:text-3xl text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Games</span>
+        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg bg-[#204220] transition-colors duration-200">
+            <i class="fas fa-gamepad text-2xl md:text-3xl text-[#39ff14]"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Games</span>
         </a>
-        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-            <i class="fas fa-cog text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
-            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Settings</span>
+        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-[#204220] transition-colors duration-200">
+            <i class="fas fa-cog text-2xl md:text-3xl text-[#39ff14]"></i>
+            <span class="text-xs mt-1 font-medium hidden md:block">Settings</span>
         </a>
+        <div class="mt-auto flex flex-col items-center justify-center p-4">
+            <i class="fas fa-atom text-4xl text-[#39ff14] atom-icon"></i>
+        </div>
     </nav>
 
     <!-- Main Content Area -->
     <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28">
-        <div class="max-w-6xl mx-auto mt-12">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Available Games</h1>
-            <p class="text-lg md:text-xl text-gray-600 mb-12 text-center">Hover over the cards below to learn more about each game.</p>
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-center">Games</h1>
+        
+        <!-- Search bar -->
+        <div class="mt-8 flex justify-center">
+            <input type="text" id="search-bar" placeholder="Search for games..." class="w-full max-w-lg px-4 py-2 rounded-lg bg-[#162e16] text-[#39ff14] border border-[#204220] focus:outline-none focus:ring-2 focus:ring-[#39ff14]">
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Game Card 1 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/38bdf8/ffffff?text=Strategy+Game" alt="Strategy Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Strategy Quest</h2>
-                            <p class="text-sm mt-2">A deep strategy game where you build an empire and conquer your rivals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game Card 2 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/4ade80/ffffff?text=Puzzle+Game" alt="Puzzle Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Mind Bender</h2>
-                            <p class="text-sm mt-2">Test your logic with a series of challenging and beautiful puzzles.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game Card 3 -->
-                <div class="bg-white rounded-2xl shadow-xl card-container">
-                    <div class="relative w-full h-full">
-                        <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Adventure+Game" alt="Adventure Game" class="w-full h-full object-cover rounded-2xl card-image">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
-                            <h2 class="text-2xl font-bold">Forgotten Realms</h2>
-                            <p class="text-sm mt-2">Embark on an epic journey to a land of magic and mystery.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="game-grid" class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <!-- Game cards will be dynamically added here -->
         </div>
     </main>
+
+    <script>
+        const gameGrid = document.getElementById('game-grid');
+        const searchBar = document.getElementById('search-bar');
+
+        const games = [
+            { name: 'Tic Tac Toe', imageUrl: 'https://placehold.co/500x500/007bff/ffffff?text=TicTacToe' },
+            { name: 'Sudoku', imageUrl: 'https://placehold.co/500x500/28a745/ffffff?text=Sudoku' },
+            { name: 'Chess', imageUrl: 'https://placehold.co/500x500/6f42c1/ffffff?text=Chess' },
+            { name: '2048', imageUrl: 'https://placehold.co/500x500/fd7e14/ffffff?text=2048' },
+            { name: 'Snake', imageUrl: 'https://placehold.co/500x500/dc3545/ffffff?text=Snake' },
+            { name: 'Minesweeper', imageUrl: 'https://placehold.co/500x500/ffc107/ffffff?text=Minesweeper' },
+            { name: 'Tetris', imageUrl: 'https://placehold.co/500x500/17a2b8/ffffff?text=Tetris' },
+            { name: 'Flappy Bird', imageUrl: 'https://placehold.co/500x500/6610f2/ffffff?text=FlappyBird' },
+            { name: 'Pac-Man', imageUrl: 'https://placehold.co/500x500/e83e8c/ffffff?text=Pac-Man' },
+            { name: 'Connect Four', imageUrl: 'https://placehold.co/500x500/20c997/ffffff?text=ConnectFour' },
+            { name: 'Pong', imageUrl: 'https://placehold.co/500x500/adb5bd/ffffff?text=Pong' },
+            { name: 'Hangman', imageUrl: 'https://placehold.co/500x500/6c757d/ffffff?text=Hangman' },
+            { name: 'Wordle', imageUrl: 'https://placehold.co/500x500/343a40/ffffff?text=Wordle' },
+            { name: 'Simon', imageUrl: 'https://placehold.co/500x500/0d6efd/ffffff?text=Simon' },
+            { name: 'Memory Game', imageUrl: 'https://placehold.co/500x500/e9ecef/000000?text=Memory' },
+            { name: 'Crossy Road', imageUrl: 'https://placehold.co/500x500/fd7e14/000000?text=CrossyRoad' },
+            { name: 'Doodle Jump', imageUrl: 'https://placehold.co/500x500/6f42c1/000000?text=DoodleJump' },
+            { name: 'Bubble Shooter', imageUrl: 'https://placehold.co/500x500/28a745/000000?text=BubbleShooter' },
+            { name: 'Breakout', imageUrl: 'https://placehold.co/500x500/007bff/000000?text=Breakout' },
+            { name: 'Asteroids', imageUrl: 'https://placehold.co/500x500/dc3545/000000?text=Asteroids' },
+            { name: 'Space Invaders', imageUrl: 'https://placehold.co/500x500/ffc107/000000?text=SpaceInvaders' },
+            { name: 'Tetris 2', imageUrl: 'https://placehold.co/500x500/17a2b8/000000?text=Tetris+2' },
+            { name: 'Word Search', imageUrl: 'https://placehold.co/500x500/6610f2/000000?text=WordSearch' }
+        ];
+
+        function renderGames(filteredGames) {
+            gameGrid.innerHTML = ''; // Clear existing games
+            filteredGames.forEach(game => {
+                const gameCard = document.createElement('a');
+                gameCard.href = `game-details.html?game=${encodeURIComponent(game.name)}`;
+                gameCard.className = 'game-card relative rounded-lg overflow-hidden shadow-lg flex items-center justify-center text-center';
+                gameCard.style.backgroundImage = `url(${game.imageUrl})`;
+
+                const cardInfo = document.createElement('div');
+                cardInfo.className = 'game-info';
+                
+                const gameName = document.createElement('h2');
+                gameName.className = 'text-xl md:text-2xl font-bold text-white';
+                gameName.textContent = game.name;
+
+                cardInfo.appendChild(gameName);
+                gameCard.appendChild(cardInfo);
+                gameGrid.appendChild(gameCard);
+            });
+        }
+
+        renderGames(games); // Render all games on initial load
+
+        searchBar.addEventListener('input', (event) => {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredGames = games.filter(game => game.name.toLowerCase().includes(searchTerm));
+            renderGames(filteredGames);
+        });
+    </script>
 </body>
 </html>
