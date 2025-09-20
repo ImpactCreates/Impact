@@ -3,61 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games | My Cool Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image {
+            transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .card-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .card-container:hover .card-image {
+            filter: blur(4px) brightness(60%);
+            transform: scale(1.05);
+        }
+
+        .card-container:hover .card-overlay {
+            opacity: 1;
+        }
+    </style>
 </head>
-<body>
+<body class="flex min-h-screen">
+    <!-- Left Navigation Bar -->
+    <nav class="w-16 md:w-20 bg-white h-screen fixed top-0 left-0 flex flex-col items-center py-6 shadow-lg z-10">
+        <a href="index.html" class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-home text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Home</span>
+        </a>
+        <a href="games.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-gamepad text-2xl md:text-3xl text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Games</span>
+        </a>
+        <a href="settings.html" class="mt-8 flex flex-col items-center justify-center p-4 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            <i class="fas fa-cog text-2xl md:text-3xl text-gray-400 hover:text-blue-500"></i>
+            <span class="text-xs mt-1 text-gray-700 font-medium hidden md:block">Settings</span>
+        </a>
+    </nav>
 
-    <div class="sidebar">
-        <a href="home.html"><i class="fas fa-home"></i> <span>Home</span></a>
-        <a href="games.html" class="active"><i class="fas fa-gamepad"></i> <span>Games</span></a>
-        <a href="web.html"><i class="fas fa-globe"></i> <span>Web</span></a>
-        <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a>
-    </div>
+    <!-- Main Content Area -->
+    <main class="flex-1 p-8 md:p-12 pl-20 md:pl-28">
+        <div class="max-w-6xl mx-auto mt-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Available Games</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-12 text-center">Hover over the cards below to learn more about each game.</p>
 
-    <div class="main-content">
-        <h1>Games</h1>
-        <p>Explore our selection of awesome games! Hover over an image to reveal its title.</p>
-        
-        <div class="games-container">
-            <!-- Game 1 -->
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/9d00ff/FFF" alt="Game 1">
-                <span class="game-title">Adventure Quest</span>
-            </div>
-            
-            <!-- Game 2 -->
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/800080/FFF" alt="Game 2">
-                <span class="game-title">Pixel Fighter</span>
-            </div>
-            
-            <!-- Game 3 -->
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/4b0082/FFF" alt="Game 3">
-                <span class="game-title">Cosmic Racer</span>
-            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game Card 1 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/38bdf8/ffffff?text=Strategy+Game" alt="Strategy Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Strategy Quest</h2>
+                            <p class="text-sm mt-2">A deep strategy game where you build an empire and conquer your rivals.</p>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Game 4 -->
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/6f2da8/FFF" alt="Game 4">
-                <span class="game-title">Mystery Manor</span>
-            </div>
+                <!-- Game Card 2 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/4ade80/ffffff?text=Puzzle+Game" alt="Puzzle Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Mind Bender</h2>
+                            <p class="text-sm mt-2">Test your logic with a series of challenging and beautiful puzzles.</p>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Add more game items here -->
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/32194f/FFF" alt="Game 5">
-                <span class="game-title">Tower Defense</span>
-            </div>
-
-            <div class="game-item">
-                <img src="https://placehold.co/400x400/5b1a8d/FFF" alt="Game 6">
-                <span class="game-title">Space Shooter</span>
+                <!-- Game Card 3 -->
+                <div class="bg-white rounded-2xl shadow-xl card-container">
+                    <div class="relative w-full h-full">
+                        <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Adventure+Game" alt="Adventure Game" class="w-full h-full object-cover rounded-2xl card-image">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-white text-center rounded-2xl card-overlay bg-black bg-opacity-50">
+                            <h2 class="text-2xl font-bold">Forgotten Realms</h2>
+                            <p class="text-sm mt-2">Embark on an epic journey to a land of magic and mystery.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <script src="js/script.js"></script>
+    </main>
 </body>
 </html>
