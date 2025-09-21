@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monkey Mart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .dark-green-bg {
+            background-color: #0A1A0A;
+        }
+        .neon-green-text {
+            color: #39FF14;
+        }
+        .font-exo-2 {
+            font-family: 'Exo 2', sans-serif;
+        }
+        .background-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .background-image {
+            background-image: url('https://placehold.co/1920x1080/1C3C1C/A8EB12?text=Monkey+Mart+Background');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            transform: scale(1.05);
+            width: 100%;
+            height: 100%;
+        }
+        .square-card {
+            width: 120px;
+            height: 120px;
+        }
+        .card-hover-effect {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: scale(1.03);
+        }
+        .card-hover-effect:hover .blur-overlay {
+            backdrop-filter: blur(8px);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="dark-green-bg flex flex-col min-h-screen font-exo-2 text-white">
+
+    <!-- Thin Left Navigation Bar -->
+    <nav class="w-16 md:w-20 lg:w-24 flex flex-col items-center p-4 h-full border-r border-green-800 fixed left-0 top-0 z-20">
+        <div class="flex flex-col items-center space-y-8 mt-4">
+            <a href="home.html" class="p-3 rounded-xl hover:bg-green-700 transition-colors duration-200">
+                <i class="fas fa-home text-2xl neon-green-text"></i>
+            </a>
+            <a href="games.html" class="p-3 rounded-xl hover:bg-green-700 transition-colors duration-200">
+                <i class="fas fa-gamepad text-2xl neon-green-text"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 ml-16 md:ml-20 lg:ml-24 relative p-8 md:p-12 overflow-y-auto">
+        <!-- Blurred Background Section -->
+        <div class="absolute inset-0 background-container">
+            <div class="background-image"></div>
+        </div>
+
+        <!-- Main Game Content -->
+        <div class="relative z-10 flex flex-col items-center justify-center text-center p-4 min-h-[50vh]">
+            <!-- Game Icon -->
+            <img class="w-24 h-24 rounded-2xl shadow-lg mb-4" src="https://placehold.co/120x120/1C3C1C/A8EB12?text=MM" alt="Monkey Mart Icon">
+            
+            <!-- Title and Subtitle -->
+            <h1 class="text-4xl md:text-5xl font-bold neon-green-text mb-2">Monkey Mart</h1>
+            <p class="text-gray-400 mb-8">by Tiny Dobbins</p>
+
+            <!-- Play Button -->
+            <button class="flex items-center space-x-2 bg-white text-black font-bold py-3 px-8 rounded-full shadow-xl transition-all hover:bg-green-300">
+                <i class="fas fa-play text-lg"></i>
+                <span>Play Game</span>
+            </button>
+        </div>
+
+        <!-- Footer Bar -->
+        <footer class="fixed bottom-0 left-16 md:left-20 lg:left-24 right-0 bg-black bg-opacity-50 border-t border-green-800 p-4 flex items-center justify-between z-20">
+            <div class="flex items-center">
+                <img class="w-10 h-10 rounded-lg mr-4" src="https://placehold.co/60x60/1C3C1C/A8EB12?text=MM" alt="Monkey Mart Icon">
+                <div>
+                    <p class="neon-green-text font-bold">Monkey Mart</p>
+                    <p class="text-xs text-gray-400">by Tiny Dobbins</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-green-700 transition-colors duration-200">
+                    <i class="fas fa-undo-alt text-xl text-gray-400 hover:text-white"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-green-700 transition-colors duration-200">
+                    <i class="fas fa-expand-alt text-xl text-gray-400 hover:text-white"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
